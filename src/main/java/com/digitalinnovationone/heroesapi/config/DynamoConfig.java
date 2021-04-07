@@ -1,4 +1,5 @@
 package com.digitalinnovationone.heroesapi.config;
+
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
@@ -12,6 +13,7 @@ import org.springframework.util.StringUtils;
 @Configuration
 @EnableDynamoDBRepositories
 public class DynamoConfig {
+
     @Value("${amazon.dynamodb.endpoint}")
     private String amazonDynamoDBEndpoint;
 
@@ -22,15 +24,19 @@ public class DynamoConfig {
     private String amazonAWSSecretKey;
 
     @Bean
-    public AmazonDynamoDB amazonDynamoDB(){
-        AmazonDynamoDB amazonDynamoDB = new AmazonDynamoDBClient(amazonAWSCredentials());
-        if (!StringUtils.isEmpty(amazonDynamoDBEndpoint)){
+    public AmazonDynamoDB amazonDynamoDB() {
+        AmazonDynamoDB amazonDynamoDB
+                = new AmazonDynamoDBClient(amazonAWSCredentials());
+
+        if (!StringUtils.isEmpty(amazonDynamoDBEndpoint)) {
             amazonDynamoDB.setEndpoint(amazonDynamoDBEndpoint);
         }
         return amazonDynamoDB;
     }
+
     @Bean
-    public AWSCredentials amazonAWSCredentials(){
-        return new BasicAWSCredentials(amazonAWSAccessKey, amazonAWSSecretKey);
+    public AWSCredentials amazonAWSCredentials() {
+        return new BasicAWSCredentials(
+                amazonAWSAccessKey, amazonAWSSecretKey);
     }
 }

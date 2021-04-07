@@ -53,11 +53,11 @@ public class Heroes {
         this.universe = universe;
     }
 
-    public int getFiles() {
+    public int getFilms() {
         return films;
     }
 
-    public void setFiles(int films) {
+    public void setFilms(int films) {
         this.films = films;
     }
 }
